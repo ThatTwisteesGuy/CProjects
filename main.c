@@ -10,10 +10,19 @@ int main(void)
         A->els[i] = i+1;
     }
     matrix * B = Rotate(A);
-    matrix * C = Transpose(A);
+    matrix * C = B;
+    for (int i = 0; i < 100000000; i++)
+    {
+        C = Transpose(B);
+        FreeMatrix(B);
+        B = C;
+    }
 
     display(B);
-    display(C);
+
+    FreeMatrix(A);
+    FreeMatrix(B);
+    FreeMatrix(C);
 
     return 0;
 }

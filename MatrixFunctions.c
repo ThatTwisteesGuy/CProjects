@@ -10,7 +10,7 @@
 void FreeMatrix(matrix * A)
 {
 
-    // Frees elemenents in the matrix
+    // Frees elements in the matrix
     free(A->els);
 
     // Frees the matrix itself
@@ -19,7 +19,7 @@ void FreeMatrix(matrix * A)
 }
 
 
-void display(matrix * A)
+void Display(matrix * A)
 {
     printf("\n");
     for (int i = 0; i < A->rows; i++)
@@ -33,7 +33,7 @@ void display(matrix * A)
 }
 
 
-void list(matrix * A)
+void List(matrix * A)
 {
     for (int i = 0; i < A->rows*A->columns; i++)
     {

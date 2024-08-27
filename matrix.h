@@ -21,8 +21,8 @@ matrix* Reverse(matrix* A);
 
 // External Functions
 
-void list(matrix * A);
-void display(matrix * A);
+void List(matrix * A);
+void Display(matrix * A);
 void FreeMatrix(matrix * A);
 
 #endif //MATRIX_H
