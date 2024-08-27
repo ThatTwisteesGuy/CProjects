@@ -9,20 +9,20 @@ typedef struct {
 
 // Matrix Functions
 
-matrix* GenMatrix(int m, int n);
-matrix* Identity(int m);
-matrix* Product(matrix * A, matrix * B);
-matrix* Transpose(matrix * A);
-matrix* Mirror(matrix * A);
-matrix* Flip(matrix * A);
-matrix* Rotate(matrix * A);
-matrix* Reverse(matrix* A);
+matrix* gen_matrix(int m, int n);
+matrix* identity(int m);
+matrix* product(matrix * A, matrix * B);
+matrix* transpose(matrix * A);
+matrix* mirror(matrix * A);
+matrix* flip(matrix * A);
+matrix* rotate(matrix * A);
+matrix* reverse(matrix* A);
 
 
 // External Functions
 
-void List(matrix * A);
-void Display(matrix * A);
-void FreeMatrix(matrix * A);
+void list(matrix * A);
+void display(matrix * A);
+void free_matrix(matrix * A);
 
 #endif //MATRIX_H

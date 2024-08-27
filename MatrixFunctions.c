@@ -7,7 +7,7 @@
 #include <stdbool.h>
 
 
-void FreeMatrix(matrix * A)
+void free_matrix(matrix * A)
 {
 
     // Frees elements in the matrix
@@ -19,7 +19,7 @@ void FreeMatrix(matrix * A)
 }
 
 
-void Display(matrix * A)
+void display(matrix * A)
 {
     printf("\n");
     for (int i = 0; i < A->rows; i++)
@@ -33,7 +33,7 @@ void Display(matrix * A)
 }
 
 
-void List(matrix * A)
+void list(matrix * A)
 {
     for (int i = 0; i < A->rows*A->columns; i++)
     {
@@ -42,7 +42,7 @@ void List(matrix * A)
 }
 
 
-matrix* GenMatrix(int m, int n)
+matrix* gen_matrix(int m, int n)
 {
     // Allocates memory for the matrix
     matrix * A = malloc(sizeof(matrix));
@@ -61,11 +61,11 @@ matrix* GenMatrix(int m, int n)
 }
 
 
-matrix* Identity(int m)
+matrix* identity(int m)
 {
 
     // Generates matrix which will be later returned
-    matrix* A = GenMatrix(m,m);
+    matrix* A = gen_matrix(m,m);
 
     // Sets leading diagonal to 1s
     for(int i = 0; i < m; i++)
@@ -79,7 +79,7 @@ matrix* Identity(int m)
 }
 
 
-matrix* Product(matrix * A, matrix * B)
+matrix* product(matrix * A, matrix * B)
 {
 
     // Checks that input Matrices are valid
@@ -92,7 +92,7 @@ matrix* Product(matrix * A, matrix * B)
     // Generates matrix which will later be returned
     // It is important to first check that the inputs are valid to not
     // generate a matrix for nothing
-    matrix * C = GenMatrix(A->rows, B->columns);
+    matrix * C = gen_matrix(A->rows, B->columns);
 
     // Matrix multiplication algorithm
     for (int i = 0; i < A->rows; i++)
@@ -111,9 +111,9 @@ matrix* Product(matrix * A, matrix * B)
 }
 
 
-matrix* Transpose(matrix * A)
+matrix* transpose(matrix * A)
 {
-    matrix* B = GenMatrix(A->columns, A->rows);
+    matrix* B = gen_matrix(A->columns, A->rows);
 
     for (int i = 0; i < B->columns; i++)
     {
@@ -127,10 +127,10 @@ matrix* Transpose(matrix * A)
 }
 
 
-matrix* Mirror(matrix * A)
+matrix* mirror(matrix * A)
 {
 
-    matrix* B = GenMatrix(A->rows, A->columns);
+    matrix* B = gen_matrix(A->rows, A->columns);
 
     for (int i = 0; i < B->rows*B->columns; i++)
     {
@@ -149,11 +149,11 @@ matrix* Mirror(matrix * A)
 }
 
 
-matrix* Reverse(matrix* A)
+matrix* reverse(matrix* A)
 {
 
     // Generates matrix to be later returned
-    matrix* B = GenMatrix(A->rows, A->columns);
+    matrix* B = gen_matrix(A->rows, A->columns);
 
     // m*n
     int mn = B->rows*B->columns;
@@ -170,18 +170,18 @@ matrix* Reverse(matrix* A)
 }
 
 
-matrix* Flip(matrix * A)
+matrix* flip(matrix * A)
 {
 
     // When reversing the order of the entries and then mirroring a matrix
     // this results in a flip of the matrix
 
-    matrix* C = Reverse(A);
-    matrix* B = Mirror(C);
+    matrix* C = reverse(A);
+    matrix* B = mirror(C);
 
     // Frees the intermediate matrix
 
-    FreeMatrix(C);
+    free_matrix(C);
 
     // Returns the flipped matrix
     return B;
@@ -189,18 +189,18 @@ matrix* Flip(matrix * A)
 }
 
 
-matrix* Rotate(matrix * A)
+matrix* rotate(matrix * A)
 {
 
     // When a transpose and a flip are performed consecutively on a matrix
     // this results in a 90 degree clockwise rotation of the matrix
 
-    matrix* C = Flip(A);
-    matrix* B =  Transpose(C);
+    matrix* C = flip(A);
+    matrix* B =  transpose(C);
 
     // Frees the intermediate matrix
 
-    FreeMatrix(C);
+    free_matrix(C);
 
     // Returns the rotated matrix
     return B;
