@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/matthew/CLionProjects/MatrixLibrary/cmake-build-debug",
-		"source" : "C:/Users/matthew/CLionProjects/MatrixLibrary"
+		"build" : "C:/Users/matthew/CLionProjects/CProjects/cmake-build-debug",
+		"source" : "C:/Users/matthew/CLionProjects/CProjects"
 	},
 	"version" : 
 	{

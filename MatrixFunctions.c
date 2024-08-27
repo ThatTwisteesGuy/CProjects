@@ -169,6 +169,7 @@ matrix* Reverse(matrix* A)
 
 }
 
+
 matrix* Flip(matrix * A)
 {
 
@@ -186,6 +187,7 @@ matrix* Flip(matrix * A)
     return B;
 
 }
+
 
 matrix* Rotate(matrix * A)
 {
