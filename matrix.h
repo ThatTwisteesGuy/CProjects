@@ -9,14 +9,16 @@ typedef struct {
 
 // Matrix Functions
 
+matrix* copy(matrix* A);
 matrix* gen_matrix(int m, int n);
 matrix* identity(int m);
 matrix* product(matrix * A, matrix * B);
-matrix* transpose(matrix * A);
-matrix* mirror(matrix * A);
-matrix* flip(matrix * A);
-matrix* rotate(matrix * A);
-matrix* reverse(matrix* A);
+
+void transpose(matrix * A);
+void mirror(matrix * A);
+void flip(matrix * A);
+void rotate(matrix * A);
+void reverse(matrix* A);
 
 
 // External Functions

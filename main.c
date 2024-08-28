@@ -4,25 +4,18 @@
 
 int main(void)
 {
-    matrix * A = gen_matrix(3,3);
-    for (int i = 0 ; i < 9 ; i++)
+    matrix * A = gen_matrix(4,3);
+    for (int i = 0 ; i < 12 ; i++)
     {
         A->els[i] = i+1;
     }
-    matrix * B = rotate(A);
-    matrix * C = B;
-    for (int i = 0; i < 100000000; i++)
-    {
-        C = transpose(B);
-        free_matrix(B);
-        B = C;
-    }
 
+    matrix* B = copy(A);
+    transpose(B);
+
+    display(A);
     display(B);
 
-    free_matrix(A);
-    free_matrix(B);
-    free_matrix(C);
 
     return 0;
 }

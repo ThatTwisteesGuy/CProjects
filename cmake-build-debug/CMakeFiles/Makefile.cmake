@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_GENERATOR "MinGW Makefiles")
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
   "C:/Users/matthew/CLionProjects/CProjects/CMakeLists.txt"
-  "CMakeFiles/3.28.1/CMakeCCompiler.cmake"
-  "CMakeFiles/3.28.1/CMakeRCCompiler.cmake"
-  "CMakeFiles/3.28.1/CMakeSystem.cmake"
+  "CMakeFiles/3.28.6/CMakeCCompiler.cmake"
+  "CMakeFiles/3.28.6/CMakeRCCompiler.cmake"
+  "CMakeFiles/3.28.6/CMakeSystem.cmake"
   "E:/CLion 2024.1.4/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCCompiler.cmake.in"
   "E:/CLion 2024.1.4/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCCompilerABI.c"
   "E:/CLion 2024.1.4/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake"
@@ -29,7 +29,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "E:/CLion 2024.1.4/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake"
   "E:/CLion 2024.1.4/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake"
   "E:/CLion 2024.1.4/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake"
-  "E:/CLion 2024.1.4/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeMinGWFindMake.cmake"
   "E:/CLion 2024.1.4/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeParseImplicitIncludeInfo.cmake"
   "E:/CLion 2024.1.4/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeParseImplicitLinkInfo.cmake"
   "E:/CLion 2024.1.4/bin/cmake/win/x64/share/cmake-3.28/Modules/CMakeParseLibraryArchitecture.cmake"
@@ -105,10 +104,10 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
-  "CMakeFiles/3.28.1/CMakeSystem.cmake"
-  "CMakeFiles/3.28.1/CMakeCCompiler.cmake"
-  "CMakeFiles/3.28.1/CMakeRCCompiler.cmake"
-  "CMakeFiles/3.28.1/CMakeCCompiler.cmake"
+  "CMakeFiles/3.28.6/CMakeSystem.cmake"
+  "CMakeFiles/3.28.6/CMakeCCompiler.cmake"
+  "CMakeFiles/3.28.6/CMakeRCCompiler.cmake"
+  "CMakeFiles/3.28.6/CMakeCCompiler.cmake"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 

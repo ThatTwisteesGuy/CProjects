@@ -1,10 +1,10 @@
-#include <math.h>
-
 #include "matrix.h"
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 
 void free_matrix(matrix * A)
@@ -79,6 +79,19 @@ matrix* identity(int m)
 }
 
 
+matrix* copy(matrix* A)
+{
+
+    matrix*B = gen_matrix(A->rows, A->columns);
+
+    size_t memsize = sizeof(double) * B->rows * B->columns;
+    memcpy(B->els, A->els, memsize);
+
+    return B;
+
+}
+
+
 matrix* product(matrix * A, matrix * B)
 {
 
@@ -111,49 +124,55 @@ matrix* product(matrix * A, matrix * B)
 }
 
 
-matrix* transpose(matrix * A)
+void transpose(matrix * A)
 {
-    matrix* B = gen_matrix(A->columns, A->rows);
+    int temp = A->rows;
+    A->rows = A->columns;
+    A->columns = temp;
 
-    for (int i = 0; i < B->columns; i++)
+    matrix* B = copy(A);
+
+    for (int i = 0; i < A->columns; i++)
     {
-        for (int j = 0; j < B->rows; j++)
+        for (int j = 0; j < A->rows; j++)
         {
-            B->els[i*B->columns+j] = A->els[j*B->columns+i];
+            A->els[j*A->columns+i] = B->els[i*A->rows+j];
         }
     }
 
-    return B;
+    free_matrix(B);
+
 }
 
 
-matrix* mirror(matrix * A)
+void mirror(matrix * A)
 {
 
-    matrix* B = gen_matrix(A->rows, A->columns);
+    matrix* B = copy(A);
 
     for (int i = 0; i < B->rows*B->columns; i++)
     {
         // Gets the row index of the mirrored position
         // this would be the same as the input matrix's
-        int rowIndex = (i/B->columns)*B->columns;
+        int rowIndex = (i/A->columns)*A->columns;
 
         // Calculates the mirrored offset using modulo
-        int columnOffset = B->columns-1-i%B->columns;
+        int columnOffset = A->columns-1-i%A->columns;
 
 
-        B->els[i] = A->els[rowIndex + columnOffset];
+        A->els[i] = B->els[rowIndex + columnOffset];
     }
 
-    return B;
+    free_matrix(B);
+
 }
 
 
-matrix* reverse(matrix* A)
+void reverse(matrix* A)
 {
 
     // Generates matrix to be later returned
-    matrix* B = gen_matrix(A->rows, A->columns);
+    matrix* B = copy(A);
 
     // m*n
     int mn = B->rows*B->columns;
@@ -161,47 +180,33 @@ matrix* reverse(matrix* A)
     // Reverses the order of all entries in the matrix
     for (int i = 0; i < B->rows*B->columns; i++)
     {
-        B->els[i] = A->els[mn-1-i];
+        A->els[i] = B->els[mn-1-i];
     }
 
-    // Returns the reversed matrix
-    return B;
+    free_matrix(B);
 
 }
 
 
-matrix* flip(matrix * A)
+void flip(matrix * A)
 {
 
     // When reversing the order of the entries and then mirroring a matrix
     // this results in a flip of the matrix
 
-    matrix* C = reverse(A);
-    matrix* B = mirror(C);
-
-    // Frees the intermediate matrix
-
-    free_matrix(C);
-
-    // Returns the flipped matrix
-    return B;
+    reverse(A);
+    mirror(A);
 
 }
 
 
-matrix* rotate(matrix * A)
+void rotate(matrix * A)
 {
 
     // When a transpose and a flip are performed consecutively on a matrix
     // this results in a 90 degree clockwise rotation of the matrix
 
-    matrix* C = flip(A);
-    matrix* B =  transpose(C);
+    transpose(A);
+    flip(A);
 
-    // Frees the intermediate matrix
-
-    free_matrix(C);
-
-    // Returns the rotated matrix
-    return B;
 }

@@ -23,8 +23,10 @@ CMakeFiles/MatrixLibrary.dir/MatrixFunctions.c.obj
  E:/CLion 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h
  E:/CLion 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h
  E:/CLion 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdlib_s.h
+ E:/CLion 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h
  E:/CLion 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/stdio.h
  E:/CLion 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/stdlib.h
+ E:/CLion 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/string.h
  E:/CLion 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl
  E:/CLion 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/vadefs.h
 
