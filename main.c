@@ -1,6 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "matrix.h"
+
+// #include <stdio.h>
+// #include <stdlib.h>
+
 
 int main(void)
 {
@@ -13,9 +15,12 @@ int main(void)
     matrix* B = copy(A);
     transpose(B);
 
+
     display(A);
     display(B);
 
+    free_matrix(A);
+    free_matrix(B);
 
     return 0;
 }

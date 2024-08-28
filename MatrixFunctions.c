@@ -3,7 +3,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <string.h>
 
 
@@ -82,11 +81,14 @@ matrix* identity(int m)
 matrix* copy(matrix* A)
 {
 
+    // Generates a matrix with the same sizes
     matrix*B = gen_matrix(A->rows, A->columns);
 
+    // Calculate memory size to copy and copies elements to new matrix
     size_t memsize = sizeof(double) * B->rows * B->columns;
     memcpy(B->els, A->els, memsize);
 
+    // Returns copied matrix
     return B;
 
 }
@@ -126,12 +128,15 @@ matrix* product(matrix * A, matrix * B)
 
 void transpose(matrix * A)
 {
+    // Transposes dimensions
     int temp = A->rows;
     A->rows = A->columns;
     A->columns = temp;
 
+    // Makes a copy of the input matrix
     matrix* B = copy(A);
 
+    // Transposes elements
     for (int i = 0; i < A->columns; i++)
     {
         for (int j = 0; j < A->rows; j++)
@@ -140,6 +145,7 @@ void transpose(matrix * A)
         }
     }
 
+    // Frees intermediate matrix
     free_matrix(B);
 
 }
@@ -159,10 +165,11 @@ void mirror(matrix * A)
         // Calculates the mirrored offset using modulo
         int columnOffset = A->columns-1-i%A->columns;
 
-
+        // Sets element to the mirrored element
         A->els[i] = B->els[rowIndex + columnOffset];
     }
 
+    // Frees intermediate matrix
     free_matrix(B);
 
 }
