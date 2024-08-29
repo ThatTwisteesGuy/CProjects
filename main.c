@@ -10,16 +10,10 @@
 int main(void)
 {
     matrix * A = gen_matrix(3,3);
-    for (int i = 0 ; i < 9 ; i++)
-    {
-        A->els[i] = i+1;
-    }
-
 
     display(A);
-    remove_row(A, 0);
-    display(A);
-
+    int det = determinant(A);
+    printf("\ndeterminant: %d", det);
 
     return 0;
 }

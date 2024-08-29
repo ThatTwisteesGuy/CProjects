@@ -274,44 +274,71 @@ void remove_col(matrix* A, int column)
         return;
     }
 
-
-    A->columns--;
-    refit_matrix(A);
+    transpose(A);
+    remove_row(A, column);
+    transpose(A);
 
 }
 
 
 int determinant(matrix* A)
 {
+
+    int det = 0;
     if (A->rows != A->columns)
     {
         printf("Not a Square Matrix!");
-        return 0;
+        return det;
     }
 
     if (A->rows == 0)
     {
-        return 0;
+        return det;
     }
     if (A->rows == 1)
     {
         return A->els[0];
     }
+    if (A->rows == 2)
+    {
+        return A->els[0]*A->els[3]-A->els[1]*A->els[2];
+    }
     else
     {
-        int det = 0;
+
         for (int i = 0 ; i < A->rows ; i++)
         {
-            det += A->els[i] * gen_cofactor(A, A->els[i]);
+
+            det += A->els[i] * gen_cofactor(A, i);
+
         }
+
     }
 
-    return 5;
+    return det;
 
 }
 
 int gen_cofactor(matrix* A, int pos)
 {
 
-    return 0;
+    // Get row and column to remove
+    int m = pos/A->columns;
+    int n = pos%A->columns;
+
+    // Makes a copy and removes the row and column
+    matrix * B = copy(A);
+
+    remove_row(B, m);
+    remove_col(B, n);
+
+    // Gets the cofactor of the original position
+    int CF = determinant(B)*(1+(-2*((m+n)%2)));
+
+    // Frees intermediate matrix used
+    free_matrix(B);
+
+    // Returns cofactor
+    return CF;
+
 }
