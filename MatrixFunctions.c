@@ -18,8 +18,16 @@ void free_matrix(matrix * A)
 }
 
 
+void refit_matrix(matrix * A)
+{
+
+    realloc(A->els, A->rows*A->columns*sizeof(double));
+
+}
+
 void display(matrix * A)
 {
+
     printf("\n");
     for (int i = 0; i < A->rows; i++)
     {
@@ -29,20 +37,24 @@ void display(matrix * A)
             printf("%lf \t", A->els[i*A->columns+j]);
         }
     }
+
 }
 
 
 void list(matrix * A)
 {
+
     for (int i = 0; i < A->rows*A->columns; i++)
     {
         printf("%lf, ", A->els[i]);
     }
+
 }
 
 
 matrix* gen_matrix(int m, int n)
 {
+
     // Allocates memory for the matrix
     matrix * A = malloc(sizeof(matrix));
 
@@ -57,6 +69,7 @@ matrix* gen_matrix(int m, int n)
     A->els = calloc(A->columns * A->rows,sizeof(double));
 
     return A;
+
 }
 
 
@@ -123,11 +136,13 @@ matrix* product(matrix * A, matrix * B)
 
     // Returns product of A and B
     return C;
+
 }
 
 
 void transpose(matrix * A)
 {
+
     // Transposes dimensions
     int temp = A->rows;
     A->rows = A->columns;
@@ -216,4 +231,87 @@ void rotate(matrix * A)
     transpose(A);
     flip(A);
 
+}
+
+
+void remove_row(matrix* A, int row)
+{
+    if (row >= A->rows)
+    {
+        printf("Invalid Row");
+        return;
+    }
+    if (A->rows <= 1)
+    {
+        printf("Cannot Remove Last Row");
+        return;
+    }
+
+    int rowstart_index = row*A->columns;
+    int rowend_index = row*A->columns+A->columns;
+    int final_index = (A->columns*A->rows)-1;
+
+    int bytes = sizeof(double)*(final_index-rowend_index+1);
+    memmove(&A->els[rowstart_index], &A->els[rowend_index], bytes);
+
+    A->rows--;
+    refit_matrix(A);
+
+}
+
+
+void remove_col(matrix* A, int column)
+{
+
+    if (column >= A->columns)
+    {
+        printf("Invalid Column");
+        return;
+    }
+    if (A->columns <= 1)
+    {
+        printf("Cannot Remove Last Column");
+        return;
+    }
+
+
+    A->columns--;
+    refit_matrix(A);
+
+}
+
+
+int determinant(matrix* A)
+{
+    if (A->rows != A->columns)
+    {
+        printf("Not a Square Matrix!");
+        return 0;
+    }
+
+    if (A->rows == 0)
+    {
+        return 0;
+    }
+    if (A->rows == 1)
+    {
+        return A->els[0];
+    }
+    else
+    {
+        int det = 0;
+        for (int i = 0 ; i < A->rows ; i++)
+        {
+            det += A->els[i] * gen_cofactor(A, A->els[i]);
+        }
+    }
+
+    return 5;
+
+}
+
+int gen_cofactor(matrix* A, int pos)
+{
+
+    return 0;
 }

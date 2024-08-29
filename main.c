@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <wchar.h>
+
 #include "matrix.h"
 
 // #include <stdio.h>
@@ -6,21 +9,17 @@
 
 int main(void)
 {
-    matrix * A = gen_matrix(4,3);
-    for (int i = 0 ; i < 12 ; i++)
+    matrix * A = gen_matrix(3,3);
+    for (int i = 0 ; i < 9 ; i++)
     {
         A->els[i] = i+1;
     }
 
-    matrix* B = copy(A);
-    transpose(B);
-
 
     display(A);
-    display(B);
+    remove_row(A, 0);
+    display(A);
 
-    free_matrix(A);
-    free_matrix(B);
 
     return 0;
 }
