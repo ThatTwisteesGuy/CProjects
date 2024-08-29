@@ -33,7 +33,7 @@ void free_matrix(matrix * A);
 
 // Valued Functions
 
-int determinant(matrix* A);
+int det(matrix* A);
 int gen_cofactor(matrix* A, int pos);
 
 #endif //MATRIX_H

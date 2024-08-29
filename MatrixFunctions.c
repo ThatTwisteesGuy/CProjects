@@ -281,7 +281,7 @@ void remove_col(matrix* A, int column)
 }
 
 
-int determinant(matrix* A)
+int det(matrix* A)
 {
 
     int det = 0;
@@ -333,7 +333,7 @@ int gen_cofactor(matrix* A, int pos)
     remove_col(B, n);
 
     // Gets the cofactor of the original position
-    int CF = determinant(B)*(1+(-2*((m+n)%2)));
+    int CF = det(B)*(1+(-2*((m+n)%2)));
 
     // Frees intermediate matrix used
     free_matrix(B);
