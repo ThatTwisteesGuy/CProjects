@@ -21,6 +21,7 @@ void free_matrix(matrix * A)
 void refit_matrix(matrix * A)
 {
 
+    // Reallocates the memory if the size of the matrix changed
     realloc(A->els, A->rows*A->columns*sizeof(double));
 
 }
@@ -97,7 +98,7 @@ matrix* copy(matrix* A)
     // Generates a matrix with the same sizes
     matrix*B = gen_matrix(A->rows, A->columns);
 
-    // Calculate memory size to copy and copies elements to new matrix
+    // Calculates memory size to copy and copies elements to new matrix
     size_t memsize = sizeof(double) * B->rows * B->columns;
     memcpy(B->els, A->els, memsize);
 
@@ -169,8 +170,10 @@ void transpose(matrix * A)
 void mirror(matrix * A)
 {
 
+    // Copies matrix
     matrix* B = copy(A);
 
+    // Iterates all entries
     for (int i = 0; i < B->rows*B->columns; i++)
     {
         // Gets the row index of the mirrored position
@@ -205,6 +208,7 @@ void reverse(matrix* A)
         A->els[i] = B->els[mn-1-i];
     }
 
+    // Frees intermediate matrix
     free_matrix(B);
 
 }
@@ -214,7 +218,7 @@ void flip(matrix * A)
 {
 
     // When reversing the order of the entries and then mirroring a matrix
-    // this results in a flip of the matrix
+    // This results in a flip of the matrix
 
     reverse(A);
     mirror(A);
@@ -226,7 +230,7 @@ void rotate(matrix * A)
 {
 
     // When a transpose and a flip are performed consecutively on a matrix
-    // this results in a 90 degree clockwise rotation of the matrix
+    // This results in a 90 degree clockwise rotation of the matrix
 
     transpose(A);
     flip(A);
@@ -236,24 +240,35 @@ void rotate(matrix * A)
 
 void remove_row(matrix* A, int row)
 {
+
+    // Checks if input row is valid
     if (row >= A->rows)
     {
         printf("Invalid Row");
         return;
     }
+
+    // Checks if the matrix is not on its last row
     if (A->rows <= 1)
     {
         printf("Cannot Remove Last Row");
         return;
     }
 
+    // Gets the index of the start of the row
     int rowstart_index = row*A->columns;
+    // Gets the index of the end of the row
     int rowend_index = row*A->columns+A->columns;
+    // Gets the index of the final element in the matrix
     int final_index = (A->columns*A->rows)-1;
 
+    // Calculates the total size to be moved
     int bytes = sizeof(double)*(final_index-rowend_index+1);
+
+    // Moves all consequent elements to the position of the row
     memmove(&A->els[rowstart_index], &A->els[rowend_index], bytes);
 
+    // Removes the row and refits the matrix memory
     A->rows--;
     refit_matrix(A);
 
@@ -263,19 +278,27 @@ void remove_row(matrix* A, int row)
 void remove_col(matrix* A, int column)
 {
 
+    // Checks if input column is valid
     if (column >= A->columns)
     {
         printf("Invalid Column");
         return;
     }
+
+    // Checks if the matrix is on its last column
     if (A->columns <= 1)
     {
         printf("Cannot Remove Last Column");
         return;
     }
 
+    // Transposes the matrix so that the column becomes a row
     transpose(A);
+
+    // Removes the row which was a column
     remove_row(A, column);
+
+    // Transposes back
     transpose(A);
 
 }
@@ -284,37 +307,48 @@ void remove_col(matrix* A, int column)
 int det(matrix* A)
 {
 
+    // Sets determinant 0
     int det = 0;
+
+    // Checks if the matrix is square
     if (A->rows != A->columns)
     {
         printf("Not a Square Matrix!");
         return det;
     }
 
+    // n = 0 Base Case
     if (A->rows == 0)
     {
         return det;
     }
+
+    // n = 1 Base Case
     if (A->rows == 1)
     {
         return A->els[0];
     }
+
+    // n = 2 Base Case
     if (A->rows == 2)
     {
         return A->els[0]*A->els[3]-A->els[1]*A->els[2];
     }
-    else
+
+    // Recursive Case
     {
 
         for (int i = 0 ; i < A->rows ; i++)
         {
 
+            // Adds the cofactors of the entries multiplied with the entries of the top row
             det += A->els[i] * gen_cofactor(A, i);
 
         }
 
     }
 
+    // Returns the determinant
     return det;
 
 }
@@ -326,14 +360,18 @@ int gen_cofactor(matrix* A, int pos)
     int m = pos/A->columns;
     int n = pos%A->columns;
 
-    // Makes a copy and removes the row and column
+    // Makes a copy of the original matrix
     matrix * B = copy(A);
 
+    // Removes the row and column of the position
     remove_row(B, m);
     remove_col(B, n);
 
-    // Gets the cofactor of the original position
-    int CF = det(B)*(1+(-2*((m+n)%2)));
+    // Gets the sign of the position on the sign matrix
+    int sign = 1+(-2*((m+n)%2));
+
+    // Gets the cofactor of the position on the cofactor matrix
+    int CF = det(B)*sign;
 
     // Frees intermediate matrix used
     free_matrix(B);
