@@ -19,13 +19,13 @@ matrix* product(matrix * A, matrix * B);
 void multiply(matrix* A, double s);
 void divide(matrix* A, double s);
 
-
 void transpose(matrix * A);
 void mirror(matrix * A);
 void flip(matrix * A);
 void rotate(matrix * A);
 void reverse(matrix* A);
 
+void swap_rows(matrix* A, int r1, int r2);
 void remove_row(matrix* A, int row);
 void remove_col(matrix* A, int column);
 

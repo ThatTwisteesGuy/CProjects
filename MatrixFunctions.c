@@ -263,7 +263,7 @@ void remove_row(matrix* A, int row)
     int final_index = (A->columns*A->rows)-1;
 
     // Calculates the total size to be moved
-    int bytes = sizeof(double)*(final_index-rowend_index+1);
+    size_t bytes = sizeof(double)*(final_index-rowend_index+1);
 
     // Moves all consequent elements to the position of the row
     memmove(&A->els[rowstart_index], &A->els[rowend_index], bytes);
@@ -419,3 +419,28 @@ void divide(matrix* A, double s)
 
     }
 }
+
+
+void swap_rows(matrix* A, int r1, int r2)
+{
+
+    if (r1 >= A->rows || r2 >= A->rows)
+    {
+
+        printf("Invalid Rows");
+        return;
+
+    }
+
+    matrix* B = copy(A);
+
+    size_t bytes = A->columns * sizeof(double);
+
+    memcpy(&A->els[r1*A->columns], &B->els[r2*A->columns], bytes);
+    memcpy(&A->els[r2*A->columns], &B->els[r1*A->columns], bytes);
+
+    free_matrix(B);
+
+}
+
+
