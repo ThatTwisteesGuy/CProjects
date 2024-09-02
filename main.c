@@ -11,11 +11,10 @@ int main(void)
 
     matrix * A = gen_matrix(3,3);
 
-    populate(A);
-    // for (int i = 0; i < A->rows*A->columns; i++)
-    // {
-    //     A->els[i] = ((i+1)*5)%7;
-    // }
+    for (int i = 0; i < A->rows*A->columns; i++)
+    {
+         A->els[i] = ((i+1)*5)%7;
+    }
 
     int det = determinant(A);
 

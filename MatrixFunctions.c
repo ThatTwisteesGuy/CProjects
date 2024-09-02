@@ -342,7 +342,7 @@ int determinant(matrix* A)
         {
 
             // Adds the cofactors of the entries multiplied with the entries of the top row
-            det += A->els[i] * gen_cofactor(A, i);
+            det += A->els[i] * cofactor(A, i);
 
         }
 
@@ -354,7 +354,7 @@ int determinant(matrix* A)
 }
 
 
-int gen_cofactor(matrix* A, int pos)
+int cofactor(matrix* A, int pos)
 {
 
     // Get row and column to remove
@@ -442,5 +442,3 @@ void swap_rows(matrix* A, int r1, int r2)
     free_matrix(B);
 
 }
-
-

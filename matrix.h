@@ -39,6 +39,6 @@ void populate(matrix* A);
 // Valued Functions
 
 int determinant(matrix* A);
-int gen_cofactor(matrix* A, int pos);
+int cofactor(matrix* A, int pos);
 
 #endif //MATRIX_H
