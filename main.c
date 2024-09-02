@@ -9,11 +9,11 @@
 
 int main(void)
 {
-    matrix * A = gen_matrix(3,3);
 
+    matrix * A = gen_matrix(3,3);
+    populate(A);
+    multiply(A, 2);
     display(A);
-    int det = determinant(A);
-    printf("\ndeterminant: %d", det);
 
     return 0;
 }

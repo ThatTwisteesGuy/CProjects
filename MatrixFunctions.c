@@ -304,7 +304,7 @@ void remove_col(matrix* A, int column)
 }
 
 
-int det(matrix* A)
+int determinant(matrix* A)
 {
 
     // Sets determinant 0
@@ -353,6 +353,7 @@ int det(matrix* A)
 
 }
 
+
 int gen_cofactor(matrix* A, int pos)
 {
 
@@ -371,7 +372,7 @@ int gen_cofactor(matrix* A, int pos)
     int sign = 1+(-2*((m+n)%2));
 
     // Gets the cofactor of the position on the cofactor matrix
-    int CF = det(B)*sign;
+    int CF = determinant(B)*sign;
 
     // Frees intermediate matrix used
     free_matrix(B);
@@ -379,4 +380,42 @@ int gen_cofactor(matrix* A, int pos)
     // Returns cofactor
     return CF;
 
+}
+
+
+void populate(matrix* A)
+{
+
+    for (int i = 0; i < A->rows*A->columns; i++)
+    {
+
+        printf("Element %d:", i);
+        scanf("%lf", &A->els[i]);
+
+    }
+
+}
+
+
+void multiply(matrix* A, double s)
+{
+
+    for (int i = 0; i < A->rows*A->columns; i++)
+    {
+
+        A->els[i] *= s;
+
+    }
+}
+
+
+void divide(matrix* A, double s)
+{
+
+    for (int i = 0; i < A->rows*A->columns; i++)
+    {
+
+        A->els[i] /= s;
+
+    }
 }
