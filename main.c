@@ -13,18 +13,18 @@ int main(void)
 
     for (int i = 0; i < A->rows*A->columns; i++)
     {
-         A->els[i] = ((i+1)*5)%7;
+         A->els[i] = ((i+1)*5)%11;
     }
 
-    int det = determinant(A);
+	int det = 0;
 
-    printf("\n%d\n", det);
+	for (int i = 0; i < 10000; i++)
+	{
+		swap_rows(A, 0, 1);
+		det = determinant(A);
+		printf("\n%d", det);
+	}
 
-    swap_rows(A, 0, 2);
-
-    det = determinant(A);
-
-    printf("\n%d\n", det);
 
     return 0;
 }

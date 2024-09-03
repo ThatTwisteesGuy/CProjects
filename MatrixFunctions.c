@@ -22,7 +22,9 @@ void refit_matrix(matrix * A)
 {
 
     // Reallocates the memory if the size of the matrix changed
-    realloc(A->els, A->rows*A->columns*sizeof(double));
+    size_t bytes = A->rows * A->columns * sizeof(double);
+
+    A->els = realloc(A->els, bytes);
 
 }
 
@@ -60,14 +62,14 @@ matrix* gen_matrix(int m, int n)
     matrix * A = malloc(sizeof(matrix));
 
     // Sets the number of rows
-    A -> rows = m;
+    A->rows = m;
 
     // Sets the number of columns
-    A -> columns = n;
+    A->columns = n;
 
     // Allocates memory for the elements of the matrix
     // by the data type size * m * n
-    A->els = calloc(A->columns * A->rows,sizeof(double));
+    A->els = calloc(A->columns * A->rows, sizeof(double));
 
     return A;
 
@@ -255,6 +257,7 @@ void remove_row(matrix* A, int row)
         return;
     }
 
+
     // Gets the index of the start of the row
     int rowstart_index = row*A->columns;
     // Gets the index of the end of the row
@@ -262,15 +265,20 @@ void remove_row(matrix* A, int row)
     // Gets the index of the final element in the matrix
     int final_index = (A->columns*A->rows)-1;
 
+
     // Calculates the total size to be moved
     size_t bytes = sizeof(double)*(final_index-rowend_index+1);
+
 
     // Moves all consequent elements to the position of the row
     memmove(&A->els[rowstart_index], &A->els[rowend_index], bytes);
 
+
     // Removes the row and refits the matrix memory
     A->rows--;
+
     refit_matrix(A);
+
 
 }
 
@@ -292,6 +300,7 @@ void remove_col(matrix* A, int column)
         return;
     }
 
+
     // Transposes the matrix so that the column becomes a row
     transpose(A);
 
@@ -304,11 +313,11 @@ void remove_col(matrix* A, int column)
 }
 
 
-int determinant(matrix* A)
+double determinant(matrix* A)
 {
 
     // Sets determinant 0
-    int det = 0;
+    double det = 0;
 
     // Checks if the matrix is square
     if (A->rows != A->columns)
@@ -342,7 +351,8 @@ int determinant(matrix* A)
         {
 
             // Adds the cofactors of the entries multiplied with the entries of the top row
-            det += A->els[i] * cofactor(A, i);
+            double cof = cofactor(A, i);
+            det += A->els[i] * cof;
 
         }
 
@@ -354,7 +364,7 @@ int determinant(matrix* A)
 }
 
 
-int cofactor(matrix* A, int pos)
+double cofactor(matrix* A, int pos)
 {
 
     // Get row and column to remove

@@ -5,6 +5,7 @@ typedef struct {
     int rows;
     int columns;
     double* els;
+
 } matrix;
 
 // Matrix Create Functions
@@ -38,7 +39,7 @@ void populate(matrix* A);
 
 // Valued Functions
 
-int determinant(matrix* A);
-int cofactor(matrix* A, int pos);
+double determinant(matrix* A);
+double cofactor(matrix* A, int pos);
 
 #endif //MATRIX_H
