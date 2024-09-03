@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <time.h>
 #include "matrix.h"
 
 // #include <stdio.h>
@@ -9,6 +9,8 @@
 int main(void)
 {
 
+	time_t t1 = time(NULL);
+
     matrix * A = gen_matrix(3,3);
 
     for (int i = 0; i < A->rows*A->columns; i++)
@@ -16,15 +18,13 @@ int main(void)
          A->els[i] = ((i+1)*5)%11;
     }
 
-	int det = 0;
+	printf("\ndeterminant: %lf", determinant(A));
 
-	for (int i = 0; i < 10000; i++)
-	{
-		swap_rows(A, 0, 1);
-		det = determinant(A);
-		printf("\n%d", det);
-	}
+	display(A);
 
+	matrix* B = cofactor_matrix(A);
+
+	display(B);
 
     return 0;
 }

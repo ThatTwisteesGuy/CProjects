@@ -21,9 +21,10 @@ void free_matrix(matrix * A)
 void refit_matrix(matrix * A)
 {
 
-    // Reallocates the memory if the size of the matrix changed
+    // Calculates the number of new bytes needed to realloc
     size_t bytes = A->rows * A->columns * sizeof(double);
 
+    // Reallocs memory for the elements
     A->els = realloc(A->els, bytes);
 
 }
@@ -32,13 +33,17 @@ void display(matrix * A)
 {
 
     printf("\n");
+
     for (int i = 0; i < A->rows; i++)
     {
+
         printf("\n");
+
         for (int j = 0; j < A->columns; j++)
         {
             printf("%lf \t", A->els[i*A->columns+j]);
         }
+
     }
 
 }
@@ -279,7 +284,6 @@ void remove_row(matrix* A, int row)
 
     refit_matrix(A);
 
-
 }
 
 
@@ -299,7 +303,6 @@ void remove_col(matrix* A, int column)
         printf("Cannot Remove Last Column");
         return;
     }
-
 
     // Transposes the matrix so that the column becomes a row
     transpose(A);
@@ -367,6 +370,12 @@ double determinant(matrix* A)
 double cofactor(matrix* A, int pos)
 {
 
+    if (A->rows <= 0 || A->columns <= 0)
+    {
+        printf("Matrix has dimension 0");
+        return 0.0f;
+    }
+
     // Get row and column to remove
     int m = pos/A->columns;
     int n = pos%A->columns;
@@ -396,6 +405,7 @@ double cofactor(matrix* A, int pos)
 void populate(matrix* A)
 {
 
+
     for (int i = 0; i < A->rows*A->columns; i++)
     {
 
@@ -416,6 +426,7 @@ void multiply(matrix* A, double s)
         A->els[i] *= s;
 
     }
+
 }
 
 
@@ -428,12 +439,14 @@ void divide(matrix* A, double s)
         A->els[i] /= s;
 
     }
+
 }
 
 
 void swap_rows(matrix* A, int r1, int r2)
 {
 
+    // Checks if given rows are valid
     if (r1 >= A->rows || r2 >= A->rows)
     {
 
@@ -442,13 +455,35 @@ void swap_rows(matrix* A, int r1, int r2)
 
     }
 
-    matrix* B = copy(A);
+    // Creates temporary array to hold row of elements
+    double temp[A->columns];
 
+    // Calculates the size needed to copy over
     size_t bytes = A->columns * sizeof(double);
 
-    memcpy(&A->els[r1*A->columns], &B->els[r2*A->columns], bytes);
-    memcpy(&A->els[r2*A->columns], &B->els[r1*A->columns], bytes);
+    // Copies from r1 to temp
+    memcpy(temp, &A->els[r1*A->columns], bytes);
 
-    free_matrix(B);
+    // Overwrites r1 with r2
+    memcpy(&A->els[r1*A->columns], &A->els[r2*A->columns], bytes);
+
+    // Copies temp onto r2
+    memcpy(&A->els[r2*A->columns], temp, bytes);
 
 }
+
+
+matrix* cofactor_matrix(matrix* A)
+{
+
+    matrix* B = gen_matrix(A->rows, A->columns);
+
+    for (int i= 0; i < A->rows*A->columns; i++)
+    {
+        B->els[i] = cofactor(A, i);
+    }
+
+    return B;
+
+}
+

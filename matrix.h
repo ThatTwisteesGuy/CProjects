@@ -14,6 +14,7 @@ matrix* copy(matrix* A);
 matrix* gen_matrix(int m, int n);
 matrix* identity(int m);
 matrix* product(matrix * A, matrix * B);
+matrix* cofactor_matrix(matrix* A);
 
 // Matrix Self Functions
 
