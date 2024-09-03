@@ -1,6 +1,8 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include <stdbool.h>
+
 typedef struct {
     int rows;
     int columns;
@@ -15,6 +17,8 @@ matrix* gen_matrix(int m, int n);
 matrix* identity(int m);
 matrix* product(matrix * A, matrix * B);
 matrix* cofactor_matrix(matrix* A);
+matrix* inverse(matrix* A);
+matrix* solve_system(matrix* A, matrix* v);
 
 // Matrix Self Functions
 
@@ -42,5 +46,7 @@ void populate(matrix* A);
 
 double determinant(matrix* A);
 double cofactor(matrix* A, int pos);
+
+bool is_vector(matrix* A);
 
 #endif //MATRIX_H

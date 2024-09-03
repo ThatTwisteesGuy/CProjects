@@ -12,19 +12,13 @@ int main(void)
 	time_t t1 = time(NULL);
 
     matrix * A = gen_matrix(3,3);
+	matrix * B = gen_matrix(3,1);
+	populate(A);
+	populate(B);
 
-    for (int i = 0; i < A->rows*A->columns; i++)
-    {
-         A->els[i] = ((i+1)*5)%11;
-    }
+	matrix* C = solve_system(A, B);
 
-	printf("\ndeterminant: %lf", determinant(A));
-
-	display(A);
-
-	matrix* B = cofactor_matrix(A);
-
-	display(B);
+	display(C);
 
     return 0;
 }

@@ -1,6 +1,7 @@
 CMakeFiles/MatrixLibrary.dir/MatrixFunctions.c.obj: \
  C:\Users\matthew\CLionProjects\CProjects\MatrixFunctions.c \
  C:\Users\matthew\CLionProjects\CProjects\matrix.h \
+ E:/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdbool.h \
  E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/math.h \
  E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
  E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/corecrt.h \

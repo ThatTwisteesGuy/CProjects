@@ -9,6 +9,12 @@
 void free_matrix(matrix * A)
 {
 
+    if (A == NULL)
+    {
+        printf("\nCannot free NULL Matrix");
+        return;
+    }
+
     // Frees elements in the matrix
     free(A->els);
 
@@ -31,6 +37,12 @@ void refit_matrix(matrix * A)
 
 void display(matrix * A)
 {
+
+    if (A == NULL)
+    {
+        printf("\nCannot Display NULL Matrix");
+        return;
+    }
 
     printf("\n");
 
@@ -322,6 +334,11 @@ double determinant(matrix* A)
     // Sets determinant 0
     double det = 0;
 
+    if(A == NULL)
+    {
+        return det;
+    }
+
     // Checks if the matrix is square
     if (A->rows != A->columns)
     {
@@ -487,3 +504,59 @@ matrix* cofactor_matrix(matrix* A)
 
 }
 
+
+matrix* inverse(matrix* A)
+{
+
+    double det = determinant(A);
+    if (det == 0)
+    {
+        return NULL;
+    }
+
+    matrix* B = cofactor_matrix(A);
+    transpose(B);
+    divide(B, det);
+
+    return B;
+
+}
+
+
+bool is_vector(matrix* A)
+{
+
+    if (A->columns == 1)
+    {
+        return true;
+    }
+
+        return false;
+
+}
+
+
+matrix* solve_system(matrix* A, matrix* v1)
+{
+
+    matrix* Ainv = inverse(A);
+    if (Ainv == NULL)
+    {
+        printf("\nSystem Has Infinite Solutions");
+        return NULL;
+    }
+
+    matrix* v2 = product(Ainv, v1);
+
+    if (v2 == NULL)
+    {
+        printf("\nSystem Is Incompatible");
+        free_matrix(Ainv);
+        return NULL;
+    }
+
+    free_matrix(Ainv);
+
+    return v2;
+
+}
