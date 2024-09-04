@@ -37,7 +37,6 @@ void remove_col(matrix* A, int column);
 
 // External Functions
 
-void list(matrix * A);
 void display(matrix * A);
 void free_matrix(matrix * A);
 void populate(matrix* A);
