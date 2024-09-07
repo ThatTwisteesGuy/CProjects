@@ -50,5 +50,7 @@ double dot_product(matrix* v1, matrix* v2);
 // Matrix Property Check Functions
 
 bool is_vector(matrix* A);
+bool is_equal(matrix* A, matrix* B);
+bool is_orthogonal(matrix* A);
 
 #endif //MATRIX_H

@@ -8,11 +8,18 @@
 int main(void)
 {
 
-	matrix* A = identity(3);
-	matrix* v = gen_matrix(3,1);
+    matrix* A = gen_matrix(2,2);;
 
-	matrix* c = solve_system(A, v);
-	display(c);
+    populate(A);
+
+    if (is_orthogonal(A))
+    {
+        printf("\nYes");
+    }
+    else
+    {
+        printf("\nNo");
+    }
 
     return 0;
 }

@@ -486,7 +486,7 @@ void populate(matrix* A)
     for (int i = 0 ; i < A->rows*A->columns ; i++)
     {
 
-        printf("Element %d:", i);
+        printf("\nElement %d:", i);
         scanf("%lf", &A->els[i]);
 
     }
@@ -545,7 +545,7 @@ void swap_rows(matrix* A, int r1, int r2)
     if (r1 >= A->rows || r2 >= A->rows)
     {
 
-        printf("Invalid Rows");
+        printf("\nInvalid Rows");
         return;
 
     }
@@ -613,25 +613,6 @@ matrix* inverse(matrix* A)
 }
 
 
-bool is_vector(matrix* A)
-{
-
-    if (A == NULL)
-    {
-        printf("\nCannot perform operation on NULL Matrix");
-        return false;
-    }
-
-    if (A->columns == 1)
-    {
-        return true;
-    }
-
-        return false;
-
-}
-
-
 matrix* solve_system(matrix* A, matrix* v1)
 {
 
@@ -643,7 +624,7 @@ matrix* solve_system(matrix* A, matrix* v1)
 
     if (is_vector(v1) == false)
     {
-        printf("Input vector is not a vector");
+        printf("\nInput vector is not a vector");
         return NULL;
     }
 
@@ -677,19 +658,19 @@ double dot_product(matrix* v1, matrix* v2)
 
     if (v1 == NULL || v2 == NULL)
     {
-        printf("Cannot Perform Operation On NULL Matrices");
+        printf("\nCannot Perform Operation On NULL Matrices");
         return dp;
     }
 
     if (is_vector(v1) == false || is_vector(v2) == false)
     {
-        printf("Matrices Provided Are Not Vectors");
+        printf("\nMatrices Provided Are Not Vectors");
         return dp;
     }
 
     if (v1->rows != v2->rows)
     {
-        printf("Vectors Are Mismatched");
+        printf("\nVectors Are Mismatched");
         return dp;
     }
 
@@ -699,5 +680,89 @@ double dot_product(matrix* v1, matrix* v2)
     }
 
     return dp;
+
+}
+
+
+bool is_vector(matrix* A)
+{
+
+    if (A == NULL)
+    {
+        printf("\nCannot perform operation on NULL Matrix");
+        return false;
+    }
+
+    if (A->columns == 1)
+    {
+        return true;
+    }
+
+    return false;
+
+}
+
+
+bool is_equal(matrix* A, matrix* B)
+{
+
+    if (A == NULL || B == NULL)
+    {
+        printf("\nCannot perform operation on NULL Matrix");
+        return false;
+    }
+
+    if (A->rows != B->rows || A->columns != B->columns)
+    {
+        return false;
+    }
+
+    bool eq = true;
+
+    for (int i = 0 ; i < A->rows * A->columns ; i++)
+    {
+
+        if (A->els[i] != B->els[i])
+        {
+            eq = false;
+        }
+
+    }
+
+    return eq;
+
+}
+
+
+bool is_orthogonal(matrix* A)
+{
+
+    if (A == NULL)
+    {
+        printf("\nCannot perform operation on NULL Matrix");
+        return false;
+    }
+
+    matrix* Ainv = inverse(A);
+
+    if (Ainv == NULL)
+    {
+        return false;
+    }
+
+    bool orth = false;
+
+    matrix* B = copy(A);
+    transpose(B);
+
+    if (is_equal(Ainv, B) == true)
+    {
+        orth = true;
+    }
+
+    free_matrix(Ainv);
+    free_matrix(B);
+
+    return orth;
 
 }
