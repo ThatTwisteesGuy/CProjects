@@ -52,12 +52,12 @@ void display(matrix * A)
 
     printf("\n");
 
-    for (int i = 0; i < A->rows; i++)
+    for (int i = 0 ; i < A->rows ; i++)
     {
 
         printf("\n");
 
-        for (int j = 0; j < A->columns; j++)
+        for (int j = 0 ; j < A->columns ; j++)
         {
             printf("%lf \t", A->els[i*A->columns+j]);
         }
@@ -95,7 +95,7 @@ matrix* identity(int m)
     matrix* A = gen_matrix(m,m);
 
     // Sets leading diagonal to 1s
-    for(int i = 0; i < m; i++)
+    for (int i = 0 ; i < m ; i++)
     {
         A->els[i*m+i] = 1;
     }
@@ -151,11 +151,11 @@ matrix* product(matrix * A, matrix * B)
     matrix * C = gen_matrix(A->rows, B->columns);
 
     // Matrix multiplication algorithm
-    for (int i = 0; i < A->rows; i++)
+    for (int i = 0 ; i < A->rows ; i++)
     {
-        for (int j = 0; j < B->columns; j++)
+        for (int j = 0 ; j < B->columns ; j++)
         {
-            for (int k = 0; k < A->columns; k++)
+            for (int k = 0 ; k < A->columns ; k++)
             {
                 C->els[(i*C->columns)+j] += A->els[i*A->columns+k] * B->els[k*B->columns+j];
             }
@@ -186,9 +186,9 @@ void transpose(matrix * A)
     matrix* B = copy(A);
 
     // Transposes elements
-    for (int i = 0; i < A->columns; i++)
+    for (int i = 0 ; i < A->columns ; i++)
     {
-        for (int j = 0; j < A->rows; j++)
+        for (int j = 0 ; j < A->rows ; j++)
         {
             A->els[j*A->columns+i] = B->els[i*A->rows+j];
         }
@@ -213,7 +213,7 @@ void mirror(matrix * A)
     matrix* B = copy(A);
 
     // Iterates all entries
-    for (int i = 0; i < B->rows*B->columns; i++)
+    for (int i = 0 ; i < B->rows*B->columns ; i++)
     {
         // Gets the row index of the mirrored position
         // this would be the same as the input matrix's
@@ -248,7 +248,7 @@ void reverse(matrix* A)
     int mn = B->rows*B->columns;
 
     // Reverses the order of all entries in the matrix
-    for (int i = 0; i < B->rows*B->columns; i++)
+    for (int i = 0 ; i < B->rows*B->columns ; i++)
     {
         A->els[i] = B->els[mn-1-i];
     }
@@ -483,7 +483,7 @@ void populate(matrix* A)
         return;
     }
 
-    for (int i = 0; i < A->rows*A->columns; i++)
+    for (int i = 0 ; i < A->rows*A->columns ; i++)
     {
 
         printf("Element %d:", i);
@@ -499,15 +499,15 @@ void multiply(matrix* A, double s)
 
     if (A == NULL)
     {
+
         printf("\nCannot perform operation on NULL Matrix");
         return;
+
     }
 
-    for (int i = 0; i < A->rows*A->columns; i++)
+    for (int i = 0 ; i < A->rows*A->columns ; i++)
     {
-
         A->els[i] *= s;
-
     }
 
 }
@@ -518,15 +518,15 @@ void divide(matrix* A, double s)
 
     if (A == NULL)
     {
+
         printf("\nCannot perform operation on NULL Matrix");
         return;
+
     }
 
-    for (int i = 0; i < A->rows*A->columns; i++)
+    for (int i = 0 ; i < A->rows*A->columns ; i++)
     {
-
         A->els[i] /= s;
-
     }
 
 }
@@ -579,7 +579,7 @@ matrix* cofactor_matrix(matrix* A)
 
     matrix* B = gen_matrix(A->rows, A->columns);
 
-    for (int i= 0; i < A->rows*A->columns; i++)
+    for (int i= 0 ; i < A->rows*A->columns ; i++)
     {
         B->els[i] = cofactor(A, i);
     }
@@ -635,9 +635,15 @@ bool is_vector(matrix* A)
 matrix* solve_system(matrix* A, matrix* v1)
 {
 
-    if (A == NULL)
+    if (A == NULL || v1 == NULL)
     {
-        printf("\nCannot perform operation on NULL Matrix");
+        printf("\nCannot perform operation on NULL Matrices");
+        return NULL;
+    }
+
+    if (is_vector(v1) == false)
+    {
+        printf("Input vector is not a vector");
         return NULL;
     }
 
@@ -663,3 +669,35 @@ matrix* solve_system(matrix* A, matrix* v1)
 
 }
 
+
+double dot_product(matrix* v1, matrix* v2)
+{
+
+    double dp = 0;
+
+    if (v1 == NULL || v2 == NULL)
+    {
+        printf("Cannot Perform Operation On NULL Matrices");
+        return dp;
+    }
+
+    if (is_vector(v1) == false || is_vector(v2) == false)
+    {
+        printf("Matrices Provided Are Not Vectors");
+        return dp;
+    }
+
+    if (v1->rows != v2->rows)
+    {
+        printf("Vectors Are Mismatched");
+        return dp;
+    }
+
+    for (int i = 0 ; i < v1->rows ; i++)
+    {
+        dp += v1->els[i] * v2->els[i];
+    }
+
+    return dp;
+
+}

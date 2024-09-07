@@ -11,11 +11,5 @@ CMakeFiles/MatrixLibrary.dir/main.c.obj: \
  E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h \
  E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl \
  E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
- E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/time.h \
- E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/crtdefs.h \
- E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/sys/timeb.h \
- E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/sys/timeb_s.h \
- E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/_timeval.h \
- E:/CLion\ 2024.1.4/bin/mingw/x86_64-w64-mingw32/include/pthread_time.h \
  C:\Users\matthew\CLionProjects\CProjects\matrix.h \
  E:/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/stdbool.h

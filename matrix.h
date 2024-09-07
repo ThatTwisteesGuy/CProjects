@@ -45,6 +45,9 @@ void populate(matrix* A);
 
 double determinant(matrix* A);
 double cofactor(matrix* A, int pos);
+double dot_product(matrix* v1, matrix* v2);
+
+// Matrix Property Check Functions
 
 bool is_vector(matrix* A);
 
