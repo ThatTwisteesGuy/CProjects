@@ -42,7 +42,7 @@ void refit_matrix(matrix * A)
 
 }
 
-void display(matrix * A)
+void display(const matrix * A)
 {
 
     // NULL Check
@@ -108,7 +108,7 @@ matrix* identity(int m)
 }
 
 
-matrix* copy(matrix* A)
+matrix* copy(const matrix* A)
 {
 
     // NULL Check
@@ -131,7 +131,7 @@ matrix* copy(matrix* A)
 }
 
 
-matrix* product(matrix * A, matrix * B)
+matrix* product(const matrix * A, const matrix * B)
 {
 
     // NULL Check
@@ -205,7 +205,7 @@ void transpose(matrix * A)
 }
 
 
-void mirror(matrix * A)
+void mirror(const matrix * A)
 {
 
     // NULL Check
@@ -238,7 +238,7 @@ void mirror(matrix * A)
 }
 
 
-void reverse(matrix* A)
+void reverse(const matrix* A)
 {
 
     // NULL Check
@@ -266,7 +266,7 @@ void reverse(matrix* A)
 }
 
 
-void flip(matrix * A)
+void flip(const matrix * A)
 {
 
     // NULL Check
@@ -388,7 +388,7 @@ void remove_col(matrix* A, int column)
 }
 
 
-double determinant(matrix* A)
+double determinant(const matrix* A)
 {
 
     // NULL Check
@@ -434,7 +434,7 @@ double determinant(matrix* A)
 }
 
 
-double cofactor(matrix* A, int pos)
+double cofactor(const matrix* A, int pos)
 {
 
     if (A == NULL)
@@ -491,7 +491,7 @@ double cofactor(matrix* A, int pos)
 }
 
 
-void populate(matrix* A)
+void populate(const matrix* A)
 {
 
     // NULL Check
@@ -513,7 +513,7 @@ void populate(matrix* A)
 }
 
 
-void multiply(matrix* A, double s)
+void multiply(const matrix* A, double s)
 {
 
     // NULL Check
@@ -534,7 +534,7 @@ void multiply(matrix* A, double s)
 }
 
 
-void divide(matrix* A, double s)
+void divide(const matrix* A, double s)
 {
 
     // NULL Check
@@ -555,7 +555,7 @@ void divide(matrix* A, double s)
 }
 
 
-void swap_rows(matrix* A, int r1, int r2)
+void swap_rows(const matrix* A, int r1, int r2)
 {
 
     // NULL Check
@@ -592,7 +592,7 @@ void swap_rows(matrix* A, int r1, int r2)
 }
 
 
-matrix* cofactor_matrix(matrix* A)
+matrix* cofactor_matrix(const matrix* A)
 {
 
     // NULL Check
@@ -618,7 +618,7 @@ matrix* cofactor_matrix(matrix* A)
 }
 
 
-matrix* inverse(matrix* A)
+matrix* inverse(const matrix* A)
 {
 
     // NULL Check
@@ -647,7 +647,7 @@ matrix* inverse(matrix* A)
 }
 
 
-matrix* solve_system(matrix* A, matrix* v1)
+matrix* solve_system(const matrix* A, const matrix* v1)
 {
 
     // NULL Check
@@ -692,7 +692,7 @@ matrix* solve_system(matrix* A, matrix* v1)
 }
 
 
-double modulus(matrix* v1)
+double modulus(const matrix* v1)
 {
 
     // NULL Check
@@ -723,7 +723,7 @@ double modulus(matrix* v1)
 }
 
 
-double dot_product(matrix* v1, matrix* v2)
+double dot_product(const matrix* v1, const matrix* v2)
 {
 
     // NULL Check
@@ -760,7 +760,7 @@ double dot_product(matrix* v1, matrix* v2)
 }
 
 
-bool is_vector(matrix* A)
+bool is_vector(const matrix* A)
 {
 
     // NULL Check
@@ -781,7 +781,7 @@ bool is_vector(matrix* A)
 }
 
 
-bool is_equal(matrix* A, matrix* B)
+bool is_equal(const matrix* A, const matrix* B)
 {
 
     // NULL Check
@@ -814,7 +814,7 @@ bool is_equal(matrix* A, matrix* B)
 }
 
 
-bool is_orthogonal(matrix* A)
+bool is_orthogonal(const matrix* A)
 {
 
     // NULL Check
@@ -852,7 +852,7 @@ bool is_orthogonal(matrix* A)
 }
 
 
-bool is_symmetric(matrix* A)
+bool is_symmetric(const matrix* A)
 {
 
     // NULL Check
@@ -877,7 +877,7 @@ bool is_symmetric(matrix* A)
 }
 
 
-bool is_skew_symmetric(matrix* A)
+bool is_skew_symmetric(const matrix* A)
 {
 
     // NULL Check
@@ -907,7 +907,7 @@ bool is_skew_symmetric(matrix* A)
 }
 
 
-bool is_square (matrix* A)
+bool is_square(const matrix* A)
 {
 
     // NULL Check
