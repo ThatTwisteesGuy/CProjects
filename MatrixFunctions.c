@@ -1,5 +1,4 @@
 #include "matrix.h"
-
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -381,25 +380,22 @@ void remove_col(matrix* A, int column)
 double determinant(matrix* A)
 {
 
-    // Sets determinant 0
-    double det = 0;
-
     if (A == NULL)
     {
-        return det;
+        return 0;
     }
 
     // Checks if the matrix is square
-    if (A->rows != A->columns)
+    if (is_square(A) != true)
     {
-        printf("Not a Square Matrix!");
-        return det;
+        printf("Matrix Is Not Square");
+        return 0;
     }
 
     // n = 0 Base Case
     if (A->rows == 0)
     {
-        return det;
+        return 0;
     }
 
     // n = 1 Base Case
@@ -408,23 +404,16 @@ double determinant(matrix* A)
         return A->els[0];
     }
 
-    // n = 2 Base Case
-    if (A->rows == 2)
-    {
-        return A->els[0]*A->els[3]-A->els[1]*A->els[2];
-    }
+    double det = 0;
 
     // Recursive Case
+
+    for (int i = 0 ; i < A->rows ; i++)
     {
 
-        for (int i = 0 ; i < A->rows ; i++)
-        {
-
-            // Adds the cofactors of the entries multiplied with the entries of the top row
-            double cof = cofactor(A, i);
-            det += A->els[i] * cof;
-
-        }
+        // Adds the cofactors of the entries multiplied with the entries of the top row
+        double cof = cofactor(A, i);
+        det += A->els[i] * cof;
 
     }
 
@@ -437,15 +426,34 @@ double determinant(matrix* A)
 double cofactor(matrix* A, int pos)
 {
 
+    int CF = 0;
+
     if (A == NULL)
     {
-        return 0;
+        return CF;
     }
 
-    if (A->rows <= 0 || A->columns <= 0)
+    if (is_square(A) != true)
+    {
+        printf("Matrix Is Not Square");
+        return CF;
+    }
+
+    if (A->rows <= 0)
     {
         printf("Matrix has dimension 0");
-        return 0.0f;
+        return CF;
+    }
+
+    if (pos >= A->rows*A->columns)
+    {
+        printf("Position Is Invalid");
+        return CF;
+    }
+
+    if (A->rows == 1)
+    {
+        return A->els[0];
     }
 
     // Get row and column to remove
@@ -463,7 +471,7 @@ double cofactor(matrix* A, int pos)
     int sign = 1+(-2*((m+n)%2));
 
     // Gets the cofactor of the position on the cofactor matrix
-    int CF = determinant(B)*sign;
+    CF = determinant(B)*sign;
 
     // Frees intermediate matrix used
     free_matrix(B);
@@ -651,6 +659,34 @@ matrix* solve_system(matrix* A, matrix* v1)
 }
 
 
+double modulus(matrix* v1)
+{
+
+    double mod = 0;
+
+    if (v1 == NULL)
+    {
+        printf("\nCannot Perform Operation On NULL Matrix");
+        return mod;
+    }
+
+    if (is_vector(v1) == false)
+    {
+        printf("\nMatrix Provided Is Not A Vector");
+        return mod;
+    }
+
+    for (int i = 0 ; i < v1->rows ; i++)
+    {
+        mod += v1->els[i] * v1->els[i];
+    }
+    mod = sqrt(mod);
+
+    return mod;
+
+}
+
+
 double dot_product(matrix* v1, matrix* v2)
 {
 
@@ -764,5 +800,62 @@ bool is_orthogonal(matrix* A)
     free_matrix(B);
 
     return orth;
+
+}
+
+
+bool is_symmetric(matrix* A)
+{
+
+    if (A == NULL)
+    {
+        printf("\nCannot perform operation on NULL Matrix");
+        return false;
+    }
+
+    matrix* B = copy(A);
+    transpose(B);
+
+    bool eq = is_equal(A, B);
+
+    free_matrix(B);
+
+    return eq;
+
+}
+
+
+bool is_skew_symmetric(matrix* A)
+{
+
+    if (A == NULL)
+    {
+        printf("\nCannot perform operation on NULL Matrix");
+        return false;
+    }
+
+    matrix* B = copy(A);
+    transpose(B);
+    matrix* C = copy(A);
+    multiply(C, -1);
+
+    bool eq = is_equal(C, B);
+
+    free_matrix(B);
+    free_matrix(C);
+
+    return eq;
+
+}
+
+
+bool is_square (matrix* A)
+{
+
+    if (A->rows == A->columns)
+    {
+        return true;
+    }
+        return false;
 
 }

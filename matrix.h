@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 
+
 typedef struct {
     int rows;
     int columns;
@@ -12,9 +13,9 @@ typedef struct {
 
 // Matrix Create Functions
 
-matrix* copy(matrix* A);
 matrix* gen_matrix(int m, int n);
 matrix* identity(int m);
+matrix* copy(matrix* A);
 matrix* product(matrix * A, matrix * B);
 matrix* cofactor_matrix(matrix* A);
 matrix* inverse(matrix* A);
@@ -46,11 +47,16 @@ void populate(matrix* A);
 double determinant(matrix* A);
 double cofactor(matrix* A, int pos);
 double dot_product(matrix* v1, matrix* v2);
+double modulus(matrix* v1);
 
 // Matrix Property Check Functions
 
+bool is_square(matrix* A);
 bool is_vector(matrix* A);
 bool is_equal(matrix* A, matrix* B);
 bool is_orthogonal(matrix* A);
+bool is_symmetric(matrix* A);
+bool is_skew_symmetric(matrix* A);
+
 
 #endif //MATRIX_H

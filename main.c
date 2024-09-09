@@ -8,18 +8,14 @@
 int main(void)
 {
 
-    matrix* A = gen_matrix(2,2);;
+    matrix* A = gen_matrix(3,3);;
 
     populate(A);
 
-    if (is_orthogonal(A))
-    {
-        printf("\nYes");
-    }
-    else
-    {
-        printf("\nNo");
-    }
+    double det = determinant(A);
 
+    printf("\n\nDeterminant: %lf", det);
+
+    free_matrix(A);
     return 0;
 }
