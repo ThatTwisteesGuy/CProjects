@@ -8,6 +8,7 @@
 void free_matrix(matrix * A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot free NULL Matrix");
@@ -26,6 +27,7 @@ void free_matrix(matrix * A)
 void refit_matrix(matrix * A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot refit NULL Matrix");
@@ -43,14 +45,15 @@ void refit_matrix(matrix * A)
 void display(matrix * A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot Display NULL Matrix");
         return;
     }
 
+    // Displays elements in a grid
     printf("\n");
-
     for (int i = 0 ; i < A->rows ; i++)
     {
 
@@ -108,6 +111,7 @@ matrix* identity(int m)
 matrix* copy(matrix* A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot copy NULL Matrix");
@@ -130,6 +134,7 @@ matrix* copy(matrix* A)
 matrix* product(matrix * A, matrix * B)
 {
 
+    // NULL Check
     if (A == NULL || B == NULL)
     {
         printf("\nCannot Perform Product on NULL Matrices");
@@ -170,6 +175,7 @@ matrix* product(matrix * A, matrix * B)
 void transpose(matrix * A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
@@ -202,6 +208,7 @@ void transpose(matrix * A)
 void mirror(matrix * A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
@@ -234,6 +241,7 @@ void mirror(matrix * A)
 void reverse(matrix* A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
@@ -261,6 +269,7 @@ void reverse(matrix* A)
 void flip(matrix * A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
@@ -269,7 +278,6 @@ void flip(matrix * A)
 
     // When reversing the order of the entries and then mirroring a matrix
     // This results in a flip of the matrix
-
     reverse(A);
     mirror(A);
 
@@ -279,6 +287,7 @@ void flip(matrix * A)
 void rotate(matrix * A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
@@ -287,7 +296,6 @@ void rotate(matrix * A)
 
     // When a transpose and a flip are performed consecutively on a matrix
     // This results in a 90 degree clockwise rotation of the matrix
-
     transpose(A);
     flip(A);
 
@@ -297,6 +305,7 @@ void rotate(matrix * A)
 void remove_row(matrix* A, int row)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
@@ -337,6 +346,7 @@ void remove_row(matrix* A, int row)
     // Removes the row and refits the matrix memory
     A->rows--;
 
+    // Refits the matrix memory for the new dimensions
     refit_matrix(A);
 
 }
@@ -345,6 +355,7 @@ void remove_row(matrix* A, int row)
 void remove_col(matrix* A, int column)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
@@ -380,6 +391,7 @@ void remove_col(matrix* A, int column)
 double determinant(matrix* A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         return 0;
@@ -404,9 +416,8 @@ double determinant(matrix* A)
         return A->els[0];
     }
 
-    double det = 0;
-
     // Recursive Case
+    double det = 0;
 
     for (int i = 0 ; i < A->rows ; i++)
     {
@@ -417,7 +428,7 @@ double determinant(matrix* A)
 
     }
 
-    // Returns the determinant
+    // Returns determinant
     return det;
 
 }
@@ -426,29 +437,27 @@ double determinant(matrix* A)
 double cofactor(matrix* A, int pos)
 {
 
-    int CF = 0;
-
     if (A == NULL)
     {
-        return CF;
+        return 0;
     }
 
     if (is_square(A) != true)
     {
         printf("Matrix Is Not Square");
-        return CF;
+        return 0;
     }
 
     if (A->rows <= 0)
     {
         printf("Matrix has dimension 0");
-        return CF;
+        return 0;
     }
 
     if (pos >= A->rows*A->columns)
     {
         printf("Position Is Invalid");
-        return CF;
+        return 0;
     }
 
     if (A->rows == 1)
@@ -471,7 +480,7 @@ double cofactor(matrix* A, int pos)
     int sign = 1+(-2*((m+n)%2));
 
     // Gets the cofactor of the position on the cofactor matrix
-    CF = determinant(B)*sign;
+    int CF = determinant(B)*sign;
 
     // Frees intermediate matrix used
     free_matrix(B);
@@ -485,12 +494,14 @@ double cofactor(matrix* A, int pos)
 void populate(matrix* A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot populate NULL Matrix");
         return;
     }
 
+    // Iterates and prompts user to populate each entry
     for (int i = 0 ; i < A->rows*A->columns ; i++)
     {
 
@@ -505,6 +516,7 @@ void populate(matrix* A)
 void multiply(matrix* A, double s)
 {
 
+    // NULL Check
     if (A == NULL)
     {
 
@@ -513,6 +525,7 @@ void multiply(matrix* A, double s)
 
     }
 
+    // Iterates each element and multiplies by scale factor
     for (int i = 0 ; i < A->rows*A->columns ; i++)
     {
         A->els[i] *= s;
@@ -524,6 +537,7 @@ void multiply(matrix* A, double s)
 void divide(matrix* A, double s)
 {
 
+    // NULL Check
     if (A == NULL)
     {
 
@@ -532,6 +546,7 @@ void divide(matrix* A, double s)
 
     }
 
+    // Iterates each element and divides by scale factor
     for (int i = 0 ; i < A->rows*A->columns ; i++)
     {
         A->els[i] /= s;
@@ -543,6 +558,7 @@ void divide(matrix* A, double s)
 void swap_rows(matrix* A, int r1, int r2)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
@@ -579,19 +595,24 @@ void swap_rows(matrix* A, int r1, int r2)
 matrix* cofactor_matrix(matrix* A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
         return NULL;
     }
 
+    // Generates new matrix with the same dimensions as the input matrix
     matrix* B = gen_matrix(A->rows, A->columns);
 
+    // Iterates each element and populates it with the cofactor of the
+    // corresponding entry in the input matrix
     for (int i= 0 ; i < A->rows*A->columns ; i++)
     {
         B->els[i] = cofactor(A, i);
     }
 
+    // Returns the cofactor matrix
     return B;
 
 }
@@ -600,22 +621,27 @@ matrix* cofactor_matrix(matrix* A)
 matrix* inverse(matrix* A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
         return NULL;
     }
 
+    // Gets determinant and checks if the matrix is singular
     double det = determinant(A);
     if (det == 0)
     {
+        printf("Input Matrix Is Singular");
         return NULL;
     }
 
+    // Inverse matrix algorithm
     matrix* B = cofactor_matrix(A);
     transpose(B);
     divide(B, det);
 
+    // Return inverse matrix
     return B;
 
 }
@@ -624,18 +650,21 @@ matrix* inverse(matrix* A)
 matrix* solve_system(matrix* A, matrix* v1)
 {
 
+    // NULL Check
     if (A == NULL || v1 == NULL)
     {
         printf("\nCannot perform operation on NULL Matrices");
         return NULL;
     }
 
+    // Checks if input vector is valid
     if (is_vector(v1) == false)
     {
         printf("\nInput vector is not a vector");
         return NULL;
     }
 
+    // Checks if system has infinite solutions
     matrix* Ainv = inverse(A);
     if (Ainv == NULL)
     {
@@ -643,8 +672,10 @@ matrix* solve_system(matrix* A, matrix* v1)
         return NULL;
     }
 
-    matrix* v2 = product(Ainv, v1);
+    // Attempts to generate the result, if the result is null
+    // the system was not compatible, otherwise returns the answer
 
+    matrix* v2 = product(Ainv, v1);
     if (v2 == NULL)
     {
         printf("\nSystem Is Incompatible");
@@ -652,8 +683,10 @@ matrix* solve_system(matrix* A, matrix* v1)
         return NULL;
     }
 
+    // Frees intermediate matrix
     free_matrix(Ainv);
 
+    // Returns vector result of the solves system
     return v2;
 
 }
@@ -662,26 +695,29 @@ matrix* solve_system(matrix* A, matrix* v1)
 double modulus(matrix* v1)
 {
 
-    double mod = 0;
-
+    // NULL Check
     if (v1 == NULL)
     {
         printf("\nCannot Perform Operation On NULL Matrix");
-        return mod;
+        return 0;
     }
 
+    // Checks if input vector is valid
     if (is_vector(v1) == false)
     {
         printf("\nMatrix Provided Is Not A Vector");
-        return mod;
+        return 0;
     }
 
+    // Modulus algorithm
+    double mod = 0;
     for (int i = 0 ; i < v1->rows ; i++)
     {
         mod += v1->els[i] * v1->els[i];
     }
     mod = sqrt(mod);
 
+    // Returns modulus of the vector
     return mod;
 
 }
@@ -690,31 +726,35 @@ double modulus(matrix* v1)
 double dot_product(matrix* v1, matrix* v2)
 {
 
-    double dp = 0;
-
+    // NULL Check
     if (v1 == NULL || v2 == NULL)
     {
         printf("\nCannot Perform Operation On NULL Matrices");
-        return dp;
+        return 0;
     }
 
+    // Checks if vectors are valid
     if (is_vector(v1) == false || is_vector(v2) == false)
     {
         printf("\nMatrices Provided Are Not Vectors");
-        return dp;
+        return 0;
     }
 
+    // Checks if vectors are of the same dimensions
     if (v1->rows != v2->rows)
     {
         printf("\nVectors Are Mismatched");
-        return dp;
+        return 0;
     }
 
+    // Dot product algorithm
+    double dp = 0;
     for (int i = 0 ; i < v1->rows ; i++)
     {
         dp += v1->els[i] * v2->els[i];
     }
 
+    // Returns dot product of the 2 vectors
     return dp;
 
 }
@@ -723,12 +763,14 @@ double dot_product(matrix* v1, matrix* v2)
 bool is_vector(matrix* A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
         return false;
     }
 
+    // Checks if matrix is a vector by checking if it's nx1
     if (A->columns == 1)
     {
         return true;
@@ -742,19 +784,21 @@ bool is_vector(matrix* A)
 bool is_equal(matrix* A, matrix* B)
 {
 
+    // NULL Check
     if (A == NULL || B == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
         return false;
     }
 
+    // Checks if dimensions are unequal
     if (A->rows != B->rows || A->columns != B->columns)
     {
         return false;
     }
 
+    // Compares each entry of both matrices
     bool eq = true;
-
     for (int i = 0 ; i < A->rows * A->columns ; i++)
     {
 
@@ -773,14 +817,15 @@ bool is_equal(matrix* A, matrix* B)
 bool is_orthogonal(matrix* A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
         return false;
     }
 
+    // Checks if inverse exists
     matrix* Ainv = inverse(A);
-
     if (Ainv == NULL)
     {
         return false;
@@ -788,14 +833,17 @@ bool is_orthogonal(matrix* A)
 
     bool orth = false;
 
+    // Makes a copy of the matrix and transposes it
     matrix* B = copy(A);
     transpose(B);
 
+    // Checks if tranpose and inverse of the matrix are the same
     if (is_equal(Ainv, B) == true)
     {
         orth = true;
     }
 
+    // Frees intermediate matrices
     free_matrix(Ainv);
     free_matrix(B);
 
@@ -807,17 +855,21 @@ bool is_orthogonal(matrix* A)
 bool is_symmetric(matrix* A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
         return false;
     }
 
+    // Copies original matrix and transposes
     matrix* B = copy(A);
     transpose(B);
 
+    // Checks if tranpose is equal to the original
     bool eq = is_equal(A, B);
 
+    // Frees intermediate matrix
     free_matrix(B);
 
     return eq;
@@ -828,19 +880,25 @@ bool is_symmetric(matrix* A)
 bool is_skew_symmetric(matrix* A)
 {
 
+    // NULL Check
     if (A == NULL)
     {
         printf("\nCannot perform operation on NULL Matrix");
         return false;
     }
 
+    // Copies input matrix and transposes it
     matrix* B = copy(A);
     transpose(B);
+
+    // Copies original matrix and multiplies it by -1
     matrix* C = copy(A);
     multiply(C, -1);
 
+    // Checks if negates matrix is equal to the transposed matrix
     bool eq = is_equal(C, B);
 
+    // Frees intermediate matrices
     free_matrix(B);
     free_matrix(C);
 
@@ -852,6 +910,14 @@ bool is_skew_symmetric(matrix* A)
 bool is_square (matrix* A)
 {
 
+    // NULL Check
+    if (A == NULL)
+    {
+        printf("\nCannot perform operation on NULL Matrix");
+        return false;
+    }
+
+    // Checks if dimensions are square
     if (A->rows == A->columns)
     {
         return true;
